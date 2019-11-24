@@ -1,0 +1,86 @@
+
+<br><br>
+<div>
+    <app-zippy title="Shipping Details">
+        Shipping Details Content
+    </app-zippy>
+
+</div>
+<br/>
+<br/>
+
+<div>
+    <input type="text" [appInputFormat]="'uppercase'">
+    <br>
+    <br>
+    <button (click)="onAddCourse()" class="btn btn-primary">Add Course</button>
+    <ul>
+        <li *ngFor="let item of courseList; index as i; even as isEven">
+            {{i}} - {{item.name}} -
+            <span *ngIf="isEven">(EVEN)</span>
+            <button (click)="onRemoveCourse(item)">Remove</button>
+        </li>
+    </ul>
+</div>
+<br/>
+<div>
+    <button class="btn btn-primary" [class.active]="isActive" (click)="onSave($event)">save</button>
+
+    <input (keyup.enter)="onKeyUp()">
+
+    <input [(ngModel)]="email" (keyup.enter)="onTwoWayBinding()">
+    <br/>
+    <br/>
+
+    <ul class="nav">
+        <li class="nav-item" [class.active]="viewMode == 'map'">
+            <a (click)="viewMode = 'map'" href="#" class="nav-link active">Map View</a>
+        </li>
+        <li class="nav-item" [class.active]="viewMode == 'list'">
+            <a (click)="viewMode = 'list'" href="#" class="nav-link">List View</a>
+        </li>
+    </ul>
+
+    <div [ngSwitch]="viewMode">
+        <div *ngSwitchCase="'map'">Map View Content List</div>
+        <div *ngSwitchCase="'list'">List View Content List</div>
+        <div *ngSwitchDefault>otherwise</div>
+    </div>
+
+    <br/>
+
+    <br/> {{course.title | uppercase | lowercase}}
+    <br/> {{course.rating | number:'2.2-2'}}
+    <br/> {{course.student | number}}
+    <br/> {{course.price | currency:'AUD':true:'3.2-2'}}
+    <br/> {{course.releaseDate | date}}
+    <br/> {{course.title | summary:30}}
+    <br/> {{course.isFavorite }}
+    <br/>
+    <br/>
+
+    <input type="text" [(ngModel)]="txtProcess">
+    <br/> {{txtProcess | titleCase}}
+
+
+    <br/>
+</div>
+
+<div>
+    <app-favorite [isFavorite]="course.isFavorite" (change)="onFavoriteChange($event)"></app-favorite>
+</div>
+
+<div>
+    <app-tweet [likesCount]="tweet.likesCount" [isActive]="tweet.isLiked"></app-tweet>
+</div>
+
+<div>
+    <app-panel>
+        <ng-container class="heading">Heading</ng-container>
+        <!-- <div class="heading">Heading</div> -->
+        <div class="body">
+            <h1>Sub Text</h1>
+            <p>Some text here...!</p>
+        </div>
+    </app-panel>
+</div>
